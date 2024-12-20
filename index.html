@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The little plane project</title>
+    <link rel="stylesheet" type="text/css" href="css/Style.css">
+    <link rel="icon" href="css/tlpp-icon.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Fly through a procedurally generated web world!" name="description">
+    <meta content="procedural, perlin, noise, world, flight simulator" name="keywords">
+    <meta content="Robbie // Glowstick#0017" name="author">
+    <meta data-n-head="ssr" data-hid="theme-color" name="theme-color" content="#770618">
+    <meta data-n-head="ssr" data-hid="og:image" name="og:image" property="og:image"
+        content="https://glowstick.me/tlpp/css/tlpp-icon.png">
+    <meta data-n-head="ssr" data-hid="og:image:width" name="og:image:width" property="og:image:width" content="512">
+    <meta data-n-head="ssr" data-hid="og:image:height" name="og:image:height" property="og:image:height" content="512">
+</head>
+
+<body>
+    <div id="canvas-container">
+        <canvas id="planeCanvas"></canvas>
+        <div id="instrumentCanvases">
+            <canvas id="speedometerCanvas"></canvas>
+        </div>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="menu">
+        <div id="hamburger">
+        </div>
+        <div id="nav">
+            <ul>
+                <li id="customize">✈️ Plane Colors</li>
+                <li id="settings">⚙️ Settings</li>
+                <li id="projectInfo"><a
+                        href="https://github.com/Glowstick0017/Little-Plane-Project/?tab=readme-ov-file#the-little-plane-project"
+                        style="color: inherit; text-decoration: inherit;"
+                        target="_blank">🌐️ Project Info</a></li>
+                <li id="support"><a
+                        href="https://github.com/sponsors/Glowstick0017"
+                        style="color: inherit; text-decoration: inherit;"
+                        target="_blank">❤️ Support Us</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="ui">
+        <div id="welcome" style="display: block">
+            <h3>Welcome to The Little Plane Project</h3>
+            <p>Use the arrow keys to navigate the world.</p>
+            <p>Up/Down changes your speed.</p>
+            <p>Left/Right changes your direction.</p>
+            <img src="css/arrowKeys.png" alt="Arrow keys" height="100">
+            <p>Use the command box to interact with the world</p>
+            <img src="css/enter.png" alt="Enter Key" height="80">
+            <p>Use the menu to change settings and customize your plane</p>
+            <img src="css/hamburger.png" alt="Hamburger Menu" height="70">
+            </br>
+            </br>
+            </br>
+            </br>
+            <img src="css/start.png" alt="Start" id="start" height="100">
+            <a href="https://github.com/Glowstick0017/Little-Plane-Project/?tab=readme-ov-file#the-little-plane-project"
+            style="color: purple; text-decoration: inherit" target="_blank">
+                <p>Learn more about The Little Plane Project</p>
+            </a>
+        </div>
+
+        <div id="customizeMenu">
+            <h3>Customise your plane</h3>
+            <div class="planeColors">
+                <div>
+                    <input type="color" id="outer" name="outer" value="#770619" />
+                    <label for="outer">Outer</label>
+                </div>
+                <div>
+                    <input type="color" id="innerMain" name="innerMain" value="#ac322e" />
+                    <label for="innerMain">Main</label>
+                </div>
+                <div>
+                    <input type="color" id="innerHighlight" name="innerHighlight" value="#d85665" />
+                    <label for="innerHighlight">Highlight</label>
+                </div>
+                <div>
+                    <input type="color" id="innerDarkHighlight" name="innerDarkHighlight" value="#8c0308" />
+                    <label for="innerDarkHighlight">Dark Highlight</label>
+                </div>
+                <div>
+                    <input type="color" id="aroundWindshield" name="aroundWindshield" value="#570101" />
+                    <label for="aroundWindshield">Around Windshield</label>
+                </div>
+                <div>
+                    <input type="color" id="windshield" name="windshield" value="#0ba0d2" />
+                    <label for="windshield">Windshield</label>
+                </div>
+                <div>
+                    <input type="color" id="propeller" name="propeller" value="#333333" />
+                    <label for="propeller">Propeller</label>
+                </div>
+                <div>
+                    <input type="color" id="propellerBlades" name="propellerBlades" value="#b3b3b3" />
+                    <label for="propellerBlades">Propeller Blades</label>
+                </div>
+                <img src="css/default.png" alt="Reset Default Colors" id="resetDefault" height="35" width="150">
+            </div>
+        </div>
+
+        <div id="settingsMenu">
+            <h3>Settings</h3>
+            <div class="options">
+                <div>
+                    <label id="color">Color</label>
+                </div>
+                <div>
+                    <label id="quality">Quality</label>
+                </div>
+                <div>
+                    <label id="seed">Seed</label>
+                </div>
+                <div>
+                    <label id="speed">Speed</label>
+                </div>
+                <div>
+                    <label id="coordinates">Coordinates</label>
+                </div>
+                <!-- change settings from menu
+            <div>
+                <input id="color" type="checkbox"/>
+                <label for="color">Color</label>
+            </div>
+            <div>
+                <input id="quality" type="text" value="quality"/>
+                <label for="quality">Quality</label>
+            </div>
+            <div>
+                <input id="seed" type="text"/>
+                <label for="seed">Seed</label>
+            </div>
+            <div>
+                <input id="speed" type="text"/>
+                <label for="speed">Speed</label>
+            </div>
+            <div>
+                <input id="coordinates" type="text"/>
+                <label for="coordinates">Coordinates</label>
+            </div>
+            -->
+            </div>
+        </div>
+    </div>
+
+    <input type="text" id="commandBox" autocomplete="off">
+    <textarea id="result" disabled></textarea>
+    <label id="coords">X = 0 Y = 0</label>
+    <img src="css/WASD.png" alt="WASD controls" id="navigateControls" height="100">
+</body>
+<footer>
+    <script src="engine/TerrainColor.js"></script>
+    <script src="engine/Perlin.js"></script>
+    <script src="engine/SHA256.js"></script>
+    <script src="engine/Engine.js"></script>
+    <script src="engine/CommandHandler.js"></script>
+    <script src="engine/Commands.js"></script>
+    <script src="engine/Plane.js"></script>
+    <script src="engine/Instruments/BaseInstrument.js"></script>
+    <script src="engine/Instruments/Speedometer.js"></script>
+    <script src="engine/Controls.js"></script>
+    <script src="engine/Ui.js"></script>
+</footer>
+
+</html>
